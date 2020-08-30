@@ -3,12 +3,6 @@ import { render } from "react-dom";
 import UploadGallery from './components/UploadGallery';
 import "./style.css";
 
-const imageList = [
-  'https://image.makewebeasy.net/makeweb/0/zTQjaPokP/DefaultData/5.png',
-  'https://image.makewebeasy.net/makeweb/0/zTQjaPokP/DefaultData/5.png',
-  'https://image.makewebeasy.net/makeweb/0/zTQjaPokP/DefaultData/5.png'
-]
-
 const delay = (duration) => {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -19,7 +13,7 @@ const delay = (duration) => {
 
 const App = () => {
 
-  const [images, setImages] = useState(imageList);
+  const [images, setImages] = useState([]);
   const [uploadProgress, setUploadProgress] = useState(0);
 
   const fakeUpload = async (file) => {

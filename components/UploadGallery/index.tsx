@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import ImageItem from "./ImageItem";
 import ImageUpload from "./ImageUpload";
+import GalleryShow from '../GalleryShow';
+import useVisibility from '../../hooks/useVisibility';
 
 type PropsType = {
   value?: string[],
@@ -25,6 +27,7 @@ const UploadGallery: React.FC<PropsType> = ({ value, onChange, onUpload, limit, 
 
   const [images, setImages] = useState(value || []);
   const [progress, setProgress] = useState(uploadProgress);
+  const galleryShow = useVisibility(false);
 
   useEffect(() => {
     if (value) {
@@ -69,6 +72,7 @@ const UploadGallery: React.FC<PropsType> = ({ value, onChange, onUpload, limit, 
       { (!limit || limit > images.length) && (
         <ImageUpload onChange={handleUpload} progress={progress}/>
       )}
+      <GalleryShow images={images} visible={galleryShow.visible}/>
     </StyledWrapper>
   );
 };
