@@ -10,8 +10,7 @@ type PropsType = {
   onChange?: (value: string[]) => void,
   onUpload?: (file) => Promise<string>,
   uploadProgress?: number,
-  limit?: number,
-  onView?: (index: number) => void
+  limit?: number
 };
 
 const StyledWrapper = styled.div`
@@ -23,11 +22,13 @@ const StyledWrapper = styled.div`
   }
 `;
 
-const UploadGallery: React.FC<PropsType> = ({ value, onChange, onUpload, limit, uploadProgress, onView }) => {
+const UploadGallery: React.FC<PropsType> = ({ value, onChange, onUpload, limit, uploadProgress }) => {
 
   const [images, setImages] = useState(value || []);
   const [progress, setProgress] = useState(uploadProgress);
-  const galleryShow = useVisibility(false);
+
+  const galleryShow = useVisibility(true);
+  const [current, setCurrent] = useState(0);
 
   useEffect(() => {
     if (value) {
@@ -55,7 +56,8 @@ const UploadGallery: React.FC<PropsType> = ({ value, onChange, onUpload, limit, 
   }
 
   const handleView = (index) => {
-    if (onView) onView(index);
+    setCurrent(index);
+    galleryShow.show();
   }
 
   return (
@@ -72,7 +74,12 @@ const UploadGallery: React.FC<PropsType> = ({ value, onChange, onUpload, limit, 
       { (!limit || limit > images.length) && (
         <ImageUpload onChange={handleUpload} progress={progress}/>
       )}
-      <GalleryShow images={images} visible={galleryShow.visible}/>
+      <GalleryShow 
+        images={images} 
+        visible={galleryShow.visible}
+        current={current}
+        onClose={galleryShow.hide}
+      />
     </StyledWrapper>
   );
 };

@@ -13,12 +13,14 @@ const delay = (duration) => {
 
 const App = () => {
 
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState([
+    'https://image.makewebeasy.net/makeweb/0/zTQjaPokP/DefaultData/5.png'
+  ]);
   const [uploadProgress, setUploadProgress] = useState(0);
 
   const fakeUpload = async (file) => {
     const iv = setInterval(() => {setUploadProgress(p => p + 10)}, 200);
-    await delay(2000);
+    await delay(100);
     clearInterval(iv);
     setUploadProgress(0);
     return URL.createObjectURL(file);
@@ -26,6 +28,7 @@ const App = () => {
 
   return (
     <div>
+      <h2>Upload Gallery</h2>
       <UploadGallery
         value={images}
         onChange={v => setImages(v)}
