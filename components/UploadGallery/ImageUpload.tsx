@@ -58,7 +58,7 @@ const ImageUpload: React.FC<PropsType> = ({ onChange, progress }) => {
       return (
         <div>
           <div>Loading...</div>
-          <div>{progress}%</div>
+          {progress && <div>{progress}%</div>}
         </div>
       )
     }
