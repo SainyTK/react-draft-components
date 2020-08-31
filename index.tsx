@@ -1,7 +1,8 @@
 import React, { Component, useState } from "react";
 import { render } from "react-dom";
-import UploadGallery from './components/UploadGallery';
 import "./style.css";
+import PaginationExample from './examples/PaginationExample';
+import UploadGalleryExample from './examples/UploadGalleryExample';
 
 const delay = (duration) => {
   return new Promise((resolve) => {
@@ -13,28 +14,12 @@ const delay = (duration) => {
 
 const App = () => {
 
-  const [images, setImages] = useState([
-    'https://image.makewebeasy.net/makeweb/0/zTQjaPokP/DefaultData/5.png'
-  ]);
-  const [uploadProgress, setUploadProgress] = useState(0);
-
-  const fakeUpload = async (file) => {
-    const iv = setInterval(() => {setUploadProgress(p => p + 10)}, 200);
-    await delay(100);
-    clearInterval(iv);
-    setUploadProgress(0);
-    return URL.createObjectURL(file);
-  }
-
   return (
     <div>
       <h2>Upload Gallery</h2>
-      <UploadGallery
-        value={images}
-        onChange={v => setImages(v)}
-        onUpload={fakeUpload}
-        uploadProgress={uploadProgress}
-      />
+      <UploadGalleryExample/>
+      <h2>Pagination</h2>
+      <PaginationExample/>
     </div>
   )
 };

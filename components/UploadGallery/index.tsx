@@ -27,7 +27,7 @@ const UploadGallery: React.FC<PropsType> = ({ value, onChange, onUpload, limit, 
   const [images, setImages] = useState(value || []);
   const [progress, setProgress] = useState(uploadProgress);
 
-  const galleryShow = useVisibility(true);
+  const galleryShow = useVisibility(false);
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
