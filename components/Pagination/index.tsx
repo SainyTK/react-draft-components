@@ -26,7 +26,7 @@ const Pagination: React.FC<PropsType> = ({current, total, pageSize, onChange}) =
       </PageItem>
     </div>
       {
-        Array.from(new Array(Math.floor(total/pageSize))).map((_, i) => (
+        Array.from(new Array(Math.ceil(total/pageSize))).map((_, i) => (
           <div key={i} className='item'>
             <PageItem 
               active={current === i}
